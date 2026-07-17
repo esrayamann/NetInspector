@@ -11,6 +11,7 @@ struct ToolView: View {
 
     let tool: NetworkTool
 
+    
     @State private var viewModel = ToolViewModel()
 
     var body: some View {
@@ -29,6 +30,15 @@ struct ToolView: View {
                     .background(AppColors.card)
                     .foregroundStyle(.white)
                     .clipShape(RoundedRectangle(cornerRadius: 14))
+                
+                if tool.requiresSubnetMask {
+
+                    TextField("Subnet Mask", text: $viewModel.subnetMask)
+                        .padding()
+                        .background(AppColors.card)
+                        .foregroundStyle(.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 14))
+                }
 
                 if tool.showsDNSRecordPicker {
 

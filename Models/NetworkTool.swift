@@ -88,4 +88,9 @@ enum NetworkTool: String, CaseIterable, Identifiable {
     var showsDNSRecordPicker: Bool {
         self == .dns
     }
+    
+    var requiresSubnetMask: Bool {
+        self == .ipCalculator
+    }
+    
 }

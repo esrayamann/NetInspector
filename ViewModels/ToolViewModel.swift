@@ -2,11 +2,12 @@ import Observation
 
 @Observable
 final class ToolViewModel {
-
+    
     var input = ""
-    var result = "Henüz sorgu yapılmadı."
+    var subnetMask = ""
+    var result = "Press the button to start."
     var selectedRecord: DNSRecordType = .a
-
+    private let ipCalculator = IPCalculatorService()
     func execute(tool: NetworkTool) {
         switch tool {
         case .ping:
@@ -20,7 +21,35 @@ final class ToolViewModel {
         case .portScan:
             result = "Port taraması yakında eklenecek."
         case .ipCalculator:
-            result = "IP Calculator yakında eklenecek."
+
+            guard let result = ipCalculator.calculate(
+                ip: input,
+                subnetMask: subnetMask
+            ) else {
+
+                self.result = "Invalid IP address."
+
+                return
+            }
+
+            self.result = """
+
+            Network Address
+            \(result.networkAddress)
+
+            Broadcast Address
+            \(result.broadcastAddress)
+
+            First Host
+            \(result.firstHost)
+
+            Last Host
+            \(result.lastHost)
+
+            Host Count
+            \(result.hostCount)
+
+            """
         }
     }
 }

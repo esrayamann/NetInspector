@@ -19,6 +19,8 @@
 		8DB721D7300AD88B001040C5 /* DNSRecordPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB721D6300AD883001040C5 /* DNSRecordPicker.swift */; };
 		8DB721D9300AD8A6001040C5 /* ToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB721D8300AD89F001040C5 /* ToolView.swift */; };
 		8DB721DC300ADF38001040C5 /* ToolViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB721DA300ADDEB001040C5 /* ToolViewModel.swift */; };
+		8DB721DE300AE22F001040C5 /* IPCalculationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB721DD300AE215001040C5 /* IPCalculationResult.swift */; };
+		8DB721E0300AE325001040C5 /* IPCalculatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB721DF300AE24D001040C5 /* IPCalculatorService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,8 @@
 		8DB721D6300AD883001040C5 /* DNSRecordPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSRecordPicker.swift; sourceTree = "<group>"; };
 		8DB721D8300AD89F001040C5 /* ToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolView.swift; sourceTree = "<group>"; };
 		8DB721DA300ADDEB001040C5 /* ToolViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolViewModel.swift; sourceTree = "<group>"; };
+		8DB721DD300AE215001040C5 /* IPCalculationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPCalculationResult.swift; sourceTree = "<group>"; };
+		8DB721DF300AE24D001040C5 /* IPCalculatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPCalculatorService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -136,6 +140,7 @@
 		8DB721B9300AD032001040C5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8DB721DD300AE215001040C5 /* IPCalculationResult.swift */,
 				8DB721D0300AD79A001040C5 /* DNSRecordType.swift */,
 				8DB721C5300AD151001040C5 /* NetworkTool.swift */,
 			);
@@ -163,6 +168,7 @@
 		8DB721BC300AD079001040C5 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				8DB721DF300AE24D001040C5 /* IPCalculatorService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -357,7 +363,9 @@
 			files = (
 				8DB721D3300AD856001040C5 /* PrimaryButton.swift in Sources */,
 				8DB721DC300ADF38001040C5 /* ToolViewModel.swift in Sources */,
+				8DB721DE300AE22F001040C5 /* IPCalculationResult.swift in Sources */,
 				8DB721D7300AD88B001040C5 /* DNSRecordPicker.swift in Sources */,
+				8DB721E0300AE325001040C5 /* IPCalculatorService.swift in Sources */,
 				8DB721CE300AD433001040C5 /* ToolCard.swift in Sources */,
 				8DB721CF300AD43D001040C5 /* NetworkTool.swift in Sources */,
 				8DB721D5300AD86B001040C5 /* ResultCard.swift in Sources */,
