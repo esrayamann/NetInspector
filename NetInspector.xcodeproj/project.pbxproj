@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D9CFE933011E7D5005A2DDE /* PortScanResultCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9CFE923011E7CD005A2DDE /* PortScanResultCard.swift */; };
+		8D9CFE953011E85F005A2DDE /* PingResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9CFE943011E85C005A2DDE /* PingResult.swift */; };
+		8D9CFE973011E86D005A2DDE /* PingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9CFE963011E869005A2DDE /* PingService.swift */; };
+		8D9CFE993011E907005A2DDE /* DnsResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9CFE983011E8FF005A2DDE /* DnsResolver.swift */; };
+		8D9CFE9B3011EA09005A2DDE /* PingStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9CFE9A3011E9FE005A2DDE /* PingStatistics.swift */; };
+		8D9CFE9D3011EE08005A2DDE /* PingResultCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9CFE9C3011EE04005A2DDE /* PingResultCard.swift */; };
+		8D9CFEA13011F1ED005A2DDE /* DNSLookupResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9CFEA03011F1E7005A2DDE /* DNSLookupResult.swift */; };
+		8D9CFEA33011F2CA005A2DDE /* DNSResultCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9CFEA23011F2C4005A2DDE /* DNSResultCard.swift */; };
 		8DB721C8300AD246001040C5 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB721C7300AD18D001040C5 /* HomeView.swift */; };
 		8DB721CB300AD422001040C5 /* AppIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB721C4300AD12B001040C5 /* AppIcons.swift */; };
 		8DB721CC300AD426001040C5 /* AppSpacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB721C3300AD121001040C5 /* AppSpacing.swift */; };
@@ -21,6 +29,15 @@
 		8DB721DC300ADF38001040C5 /* ToolViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB721DA300ADDEB001040C5 /* ToolViewModel.swift */; };
 		8DB721DE300AE22F001040C5 /* IPCalculationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB721DD300AE215001040C5 /* IPCalculationResult.swift */; };
 		8DB721E0300AE325001040C5 /* IPCalculatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB721DF300AE24D001040C5 /* IPCalculatorService.swift */; };
+		8DB721E2300AE4D7001040C5 /* DNSLookupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB721E1300AE4CF001040C5 /* DNSLookupService.swift */; };
+		8DB721E4300AE59C001040C5 /* DNSResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB721E3300AE596001040C5 /* DNSResponse.swift */; };
+		8DC646E8300E484C00EA7811 /* WhoisService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC646E7300E484600EA7811 /* WhoisService.swift */; };
+		8DC646EA300E4A9900EA7811 /* RDAPResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC646E9300E4A9500EA7811 /* RDAPResponse.swift */; };
+		8DC646EC300E4B4D00EA7811 /* AnyCodeble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC646EB300E4B4600EA7811 /* AnyCodeble.swift */; };
+		8DC646EE300E55D500EA7811 /* PortScanResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC646ED300E55CB00EA7811 /* PortScanResult.swift */; };
+		8DC646F2300E55F800EA7811 /* PortService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC646F1300E55F300EA7811 /* PortService.swift */; };
+		8DC646F4300E580100EA7811 /* PortScannerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC646F3300E57FB00EA7811 /* PortScannerService.swift */; };
+		8DC646F9300E5B0C00EA7811 /* Array+Chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC646F8300E5A9500EA7811 /* Array+Chunk.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +58,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8D9CFE923011E7CD005A2DDE /* PortScanResultCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortScanResultCard.swift; sourceTree = "<group>"; };
+		8D9CFE943011E85C005A2DDE /* PingResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingResult.swift; sourceTree = "<group>"; };
+		8D9CFE963011E869005A2DDE /* PingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingService.swift; sourceTree = "<group>"; };
+		8D9CFE983011E8FF005A2DDE /* DnsResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DnsResolver.swift; sourceTree = "<group>"; };
+		8D9CFE9A3011E9FE005A2DDE /* PingStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingStatistics.swift; sourceTree = "<group>"; };
+		8D9CFE9C3011EE04005A2DDE /* PingResultCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PingResultCard.swift; sourceTree = "<group>"; };
+		8D9CFEA03011F1E7005A2DDE /* DNSLookupResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSLookupResult.swift; sourceTree = "<group>"; };
+		8D9CFEA23011F2C4005A2DDE /* DNSResultCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSResultCard.swift; sourceTree = "<group>"; };
 		8DB7218E300AD003001040C5 /* NetInspector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetInspector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DB7219B300AD005001040C5 /* NetInspectorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetInspectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DB721A5300AD005001040C5 /* NetInspectorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetInspectorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,6 +83,15 @@
 		8DB721DA300ADDEB001040C5 /* ToolViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolViewModel.swift; sourceTree = "<group>"; };
 		8DB721DD300AE215001040C5 /* IPCalculationResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPCalculationResult.swift; sourceTree = "<group>"; };
 		8DB721DF300AE24D001040C5 /* IPCalculatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPCalculatorService.swift; sourceTree = "<group>"; };
+		8DB721E1300AE4CF001040C5 /* DNSLookupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSLookupService.swift; sourceTree = "<group>"; };
+		8DB721E3300AE596001040C5 /* DNSResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DNSResponse.swift; sourceTree = "<group>"; };
+		8DC646E7300E484600EA7811 /* WhoisService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhoisService.swift; sourceTree = "<group>"; };
+		8DC646E9300E4A9500EA7811 /* RDAPResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RDAPResponse.swift; sourceTree = "<group>"; };
+		8DC646EB300E4B4600EA7811 /* AnyCodeble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCodeble.swift; sourceTree = "<group>"; };
+		8DC646ED300E55CB00EA7811 /* PortScanResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortScanResult.swift; sourceTree = "<group>"; };
+		8DC646F1300E55F300EA7811 /* PortService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortService.swift; sourceTree = "<group>"; };
+		8DC646F3300E57FB00EA7811 /* PortScannerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortScannerService.swift; sourceTree = "<group>"; };
+		8DC646F8300E5A9500EA7811 /* Array+Chunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Chunk.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -115,6 +149,7 @@
 				8DB721BE300AD088001040C5 /* Resources */,
 				8DB721BC300AD079001040C5 /* Services */,
 				8DB721BD300AD081001040C5 /* Theme */,
+				8DC646F7300E5A8000EA7811 /* Utilities */,
 				8DB721BB300AD072001040C5 /* ViewModels */,
 				8DB721BA300AD069001040C5 /* Views */,
 			);
@@ -140,6 +175,13 @@
 		8DB721B9300AD032001040C5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8D9CFEA03011F1E7005A2DDE /* DNSLookupResult.swift */,
+				8D9CFE9A3011E9FE005A2DDE /* PingStatistics.swift */,
+				8D9CFE943011E85C005A2DDE /* PingResult.swift */,
+				8DC646ED300E55CB00EA7811 /* PortScanResult.swift */,
+				8DC646EB300E4B4600EA7811 /* AnyCodeble.swift */,
+				8DC646E9300E4A9500EA7811 /* RDAPResponse.swift */,
+				8DB721E3300AE596001040C5 /* DNSResponse.swift */,
 				8DB721DD300AE215001040C5 /* IPCalculationResult.swift */,
 				8DB721D0300AD79A001040C5 /* DNSRecordType.swift */,
 				8DB721C5300AD151001040C5 /* NetworkTool.swift */,
@@ -168,6 +210,12 @@
 		8DB721BC300AD079001040C5 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				8D9CFE983011E8FF005A2DDE /* DnsResolver.swift */,
+				8D9CFE963011E869005A2DDE /* PingService.swift */,
+				8DC646F3300E57FB00EA7811 /* PortScannerService.swift */,
+				8DC646F1300E55F300EA7811 /* PortService.swift */,
+				8DC646E7300E484600EA7811 /* WhoisService.swift */,
+				8DB721E1300AE4CF001040C5 /* DNSLookupService.swift */,
 				8DB721DF300AE24D001040C5 /* IPCalculatorService.swift */,
 			);
 			path = Services;
@@ -209,12 +257,23 @@
 		8DB721C1300AD0AB001040C5 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				8D9CFEA23011F2C4005A2DDE /* DNSResultCard.swift */,
+				8D9CFE9C3011EE04005A2DDE /* PingResultCard.swift */,
+				8D9CFE923011E7CD005A2DDE /* PortScanResultCard.swift */,
 				8DB721D6300AD883001040C5 /* DNSRecordPicker.swift */,
 				8DB721D4300AD868001040C5 /* ResultCard.swift */,
 				8DB721D2300AD852001040C5 /* PrimaryButton.swift */,
 				8DB721C6300AD185001040C5 /* ToolCard.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		8DC646F7300E5A8000EA7811 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				8DC646F8300E5A9500EA7811 /* Array+Chunk.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -361,20 +420,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D9CFE953011E85F005A2DDE /* PingResult.swift in Sources */,
+				8D9CFE9B3011EA09005A2DDE /* PingStatistics.swift in Sources */,
+				8D9CFE933011E7D5005A2DDE /* PortScanResultCard.swift in Sources */,
 				8DB721D3300AD856001040C5 /* PrimaryButton.swift in Sources */,
+				8DB721E2300AE4D7001040C5 /* DNSLookupService.swift in Sources */,
 				8DB721DC300ADF38001040C5 /* ToolViewModel.swift in Sources */,
 				8DB721DE300AE22F001040C5 /* IPCalculationResult.swift in Sources */,
+				8DC646EC300E4B4D00EA7811 /* AnyCodeble.swift in Sources */,
 				8DB721D7300AD88B001040C5 /* DNSRecordPicker.swift in Sources */,
+				8DC646F9300E5B0C00EA7811 /* Array+Chunk.swift in Sources */,
+				8DB721E4300AE59C001040C5 /* DNSResponse.swift in Sources */,
+				8D9CFEA33011F2CA005A2DDE /* DNSResultCard.swift in Sources */,
 				8DB721E0300AE325001040C5 /* IPCalculatorService.swift in Sources */,
 				8DB721CE300AD433001040C5 /* ToolCard.swift in Sources */,
 				8DB721CF300AD43D001040C5 /* NetworkTool.swift in Sources */,
+				8DC646F4300E580100EA7811 /* PortScannerService.swift in Sources */,
+				8DC646EA300E4A9900EA7811 /* RDAPResponse.swift in Sources */,
+				8DC646F2300E55F800EA7811 /* PortService.swift in Sources */,
 				8DB721D5300AD86B001040C5 /* ResultCard.swift in Sources */,
 				8DB721CC300AD426001040C5 /* AppSpacing.swift in Sources */,
+				8DC646EE300E55D500EA7811 /* PortScanResult.swift in Sources */,
 				8DB721D1300AD7A5001040C5 /* DNSRecordType.swift in Sources */,
 				8DB721CB300AD422001040C5 /* AppIcons.swift in Sources */,
+				8DC646E8300E484C00EA7811 /* WhoisService.swift in Sources */,
+				8D9CFEA13011F1ED005A2DDE /* DNSLookupResult.swift in Sources */,
 				8DB721CD300AD42A001040C5 /* AppColors.swift in Sources */,
 				8DB721D9300AD8A6001040C5 /* ToolView.swift in Sources */,
+				8D9CFE9D3011EE08005A2DDE /* PingResultCard.swift in Sources */,
 				8DB721C8300AD246001040C5 /* HomeView.swift in Sources */,
+				8D9CFE973011E86D005A2DDE /* PingService.swift in Sources */,
+				8D9CFE993011E907005A2DDE /* DnsResolver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

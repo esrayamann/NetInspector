@@ -93,4 +93,18 @@ enum NetworkTool: String, CaseIterable, Identifiable {
         self == .ipCalculator
     }
     
+    var shouldForceLowercase: Bool {
+        switch self {
+        case .dns, .whois:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    var requiresPortRange: Bool {
+
+        self == .portScan
+
+    }
 }

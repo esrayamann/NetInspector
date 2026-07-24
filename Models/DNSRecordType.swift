@@ -27,4 +27,21 @@ enum DNSRecordType: String, CaseIterable, Identifiable {
                 return "Text Record"
             }
         }
+    
+    var queryValue: Int {
+
+            switch self {
+
+            case .a:
+                return 1
+
+            case .mx:
+                return 15
+
+            case .txt:
+                return 16
+
+            }
+
+        }
 }

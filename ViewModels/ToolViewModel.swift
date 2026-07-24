@@ -1,4 +1,5 @@
 import Observation
+import Foundation
 
 @Observable
 final class ToolViewModel {
@@ -7,20 +8,171 @@ final class ToolViewModel {
     var subnetMask = ""
     var result = "Press the button to start."
     var selectedRecord: DNSRecordType = .a
+    var startPort = "1"
+    var endPort = "1024"
+    var openPorts: [PortScanResult] = []
+    var isScanning = false
+    var progress: Double = 0
+    var scannedPorts = 0
+    var totalPorts = 0
+    var scanDuration: Double = 0
+    var scanResults: [PortScanResult] = []
+    var pingHost = ""
+    var pingIP = ""
+    var pingReplies: [Double] = []
+    var isPinging = false
+    var dnsResult: DNSLookupResult?
+    var isLookingUpDNS = false
+    
     private let ipCalculator = IPCalculatorService()
-    func execute(tool: NetworkTool) {
+    private let dnsService = DNSLookupService()
+    private let whoisService = WhoisService()
+    private let portScanner = PortScannerService()
+    private let portService = PortService()
+    private let pingService = PingService()
+    
+    func execute(tool: NetworkTool) async {
         switch tool {
         case .ping:
-            result = "Ping işlemi yakında eklenecek."
+
+            pingReplies.removeAll()
+            pingHost = ""
+            pingIP = ""
+
+            isPinging = true
+
+            defer {
+                isPinging = false
+            }
+
+            do {
+
+                let stats = try await pingService.ping(host: input)
+
+                pingHost = stats.host
+                pingIP = stats.ip
+                pingReplies = stats.values
+
+                result = ""
+
+            } catch {
+
+                result = """
+                Host Unreachable
+
+                \(error.localizedDescription)
+                """
+            }
         case .dns:
-            result = "DNS sorgusu yakında eklenecek."
+
+            dnsResult = nil
+            isLookingUpDNS = true
+
+            defer {
+                isLookingUpDNS = false
+            }
+
+            do {
+
+                let lookup = try await dnsService.lookup(
+                    domain: input,
+                    type: selectedRecord
+                )
+
+                dnsResult = lookup
+                result = ""
+
+            } catch {
+
+                result = error.localizedDescription
+
+            }
+
         case .whois:
-            result = "WHOIS sorgusu yakında eklenecek."
+            do {
+
+                result = try await whoisService.lookup(
+                    domain: input
+                )
+
+            } catch {
+
+                result = error.localizedDescription
+
+            }
         case .traceroute:
             result = "Traceroute yakında eklenecek."
         case .portScan:
-            result = "Port taraması yakında eklenecek."
-        case .ipCalculator:
+
+            guard
+                let start = Int(startPort),
+                let end = Int(endPort),
+                start <= end
+            else {
+
+                result = "Invalid port range."
+                return
+            }
+
+            let startTime = Date()
+
+            isScanning = true
+            
+            scanResults.removeAll()
+            scanDuration = 0
+            result = ""
+
+            let ports = await portScanner.scan(
+                host: input,
+                from: start,
+                to: end
+            ){ scanned, total in
+                
+                Task { @MainActor in
+                    self.scannedPorts = scanned
+                    self.progress = Double(scanned) / Double(total)
+                }
+
+            }
+            
+            isScanning = false
+            
+            let duration = Date().timeIntervalSince(startTime)
+
+            scanDuration = duration
+
+            if ports.isEmpty {
+
+                scanResults = []
+
+                result = """
+                No open ports found.
+
+                Scan completed in \(String(format: "%.2f", duration)) seconds.
+                """
+
+            } else {
+
+                scanResults = ports.compactMap { port in
+
+                    let service = portService.serviceName(for: port)
+
+                    guard service != "Unknown" else {
+                        return nil
+                    }
+
+                    return PortScanResult(
+                        port: port,
+                        service: service
+                    )
+
+                }
+
+                result = ""
+
+            }
+            
+            case .ipCalculator:
 
             guard let result = ipCalculator.calculate(
                 ip: input,
@@ -52,4 +204,6 @@ final class ToolViewModel {
             """
         }
     }
+    
+    
 }
