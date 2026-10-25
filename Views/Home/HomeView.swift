@@ -11,58 +11,74 @@ import SwiftUI
 struct HomeView: View {
 
     private let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible())
+        GridItem(.flexible(), spacing: AppSpacing.medium),
+        GridItem(.flexible(), spacing: AppSpacing.medium)
     ]
 
     var body: some View {
 
         NavigationStack {
 
-            ScrollView {
+            ZStack {
+                AppColors.background
+                    .ignoresSafeArea()
 
-                VStack(alignment: .leading, spacing: AppSpacing.large) {
+                ScrollView {
 
-                    VStack(alignment: .leading, spacing: 6) {
+                    VStack(alignment: .leading, spacing: AppSpacing.large) {
 
-                        Text("NetInspector")
-                            .font(.largeTitle)
-                            .bold()
-                            .foregroundStyle(.white)
+                        HStack(alignment: .top, spacing: AppSpacing.medium) {
+                            VStack(alignment: .leading, spacing: 6) {
 
-                        Text("Professional Network Utility")
-                            .foregroundStyle(.gray)
-                    }
-
-                    LazyVGrid(columns: columns, spacing: AppSpacing.medium) {
-
-                        ForEach(NetworkTool.allCases) { tool in
-
-                            NavigationLink {
-
-                                ToolView(tool: tool)
+                                Text("NetInspector")
                                     .font(.largeTitle)
-                                        .bold()
-                                .foregroundStyle(.white)
+                                    .bold()
+                                    .foregroundStyle(.white)
 
-                            } label: {
-
-                                ToolCard(tool: tool)
+                                Text("Practical network checks, kept simple.")
+                                    .foregroundStyle(AppColors.secondaryText)
                             }
-                            .buttonStyle(.plain)
+
+                            Spacer()
+
+                            Image(systemName: "network")
+                                .font(.system(size: 28, weight: .semibold))
+                                .foregroundStyle(AppColors.primary)
+                                .padding(12)
+                                .background(AppColors.card)
+                                .clipShape(RoundedRectangle(cornerRadius: 16))
                         }
+
+                        LazyVGrid(columns: columns, spacing: AppSpacing.medium) {
+
+                            ForEach(NetworkTool.availableTools) { tool in
+
+                                NavigationLink {
+
+                                    ToolView(tool: tool)
+
+                                } label: {
+
+                                    ToolCard(tool: tool)
+                                }
+                                .buttonStyle(.plain)
+                            }
+                        }
+
+                        VStack(alignment: .leading, spacing: 4) {
+                            Label("Use only on hosts and networks you are authorized to inspect.", systemImage: "checkmark.shield")
+                                .font(.caption)
+                                .foregroundStyle(AppColors.secondaryText)
+
+                            Text("Version 1.1")
+                                .font(.caption2)
+                                .foregroundStyle(AppColors.secondaryText)
+                        }
+                        .padding(.top, AppSpacing.small)
                     }
-
-                    Spacer(minLength: 20)
-
-                    Text("Version 1.0")
-                        .font(.caption)
-                        .foregroundStyle(.gray)
-                        .frame(maxWidth: .infinity)
+                    .padding()
                 }
-                .padding()
             }
-            .background(AppColors.background)
             .navigationBarHidden(true)
         }
     }

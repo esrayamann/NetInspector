@@ -18,6 +18,16 @@ enum NetworkTool: String, CaseIterable, Identifiable {
 
     var id: String { rawValue }
 
+    /// Only tools with a complete, on-device workflow are shown in the app.
+    /// Traceroute remains in the model so it can be enabled when implemented.
+    static var availableTools: [NetworkTool] {
+        allCases.filter(\.isAvailable)
+    }
+
+    var isAvailable: Bool {
+        self != .traceroute
+    }
+
     var title: String {
         switch self {
         case .ping:
@@ -84,6 +94,23 @@ enum NetworkTool: String, CaseIterable, Identifiable {
             return "Enter IP address"
         }
     }
+
+    var summary: String {
+        switch self {
+        case .ping:
+            return "Measure TCP reachability and latency"
+        case .dns:
+            return "Query A, MX, and TXT records"
+        case .whois:
+            return "Look up domain registration data"
+        case .traceroute:
+            return "Trace the network path to a host"
+        case .portScan:
+            return "Find reachable TCP services"
+        case .ipCalculator:
+            return "Calculate IPv4 subnet details"
+        }
+    }
     
     var showsDNSRecordPicker: Bool {
         self == .dns
@@ -103,8 +130,10 @@ enum NetworkTool: String, CaseIterable, Identifiable {
     }
     
     var requiresPortRange: Bool {
-
         self == .portScan
+    }
 
+    var prefersNumericKeyboard: Bool {
+        self == .ipCalculator || self == .portScan
     }
 }

@@ -9,13 +9,15 @@ struct WhoisService {
             .lowercased()
 
         guard !domain.isEmpty else {
-            return "Please enter a domain."
+            throw URLError(.badURL)
         }
 
-        guard let url = URL(
-            string: "https://rdap.org/domain/\(domain)"
-        ) else {
-            return "Invalid URL."
+        guard
+            !domain.contains("/"),
+            let encodedDomain = domain.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed),
+            let url = URL(string: "https://rdap.org/domain/\(encodedDomain)")
+        else {
+            throw URLError(.badURL)
         }
 
         let (data, response) = try await URLSession.shared.data(from: url)
@@ -24,7 +26,7 @@ struct WhoisService {
             return "Invalid server response."
         }
 
-        guard httpResponse.statusCode == 200 else {
+        guard (200...299).contains(httpResponse.statusCode) else {
             return "WHOIS information could not be retrieved. (HTTP \(httpResponse.statusCode))"
         }
 

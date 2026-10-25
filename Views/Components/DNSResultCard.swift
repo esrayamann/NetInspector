@@ -49,24 +49,26 @@ struct DNSResultCard: View {
 
             Divider()
 
-            Text("Records")
-                .font(.headline)
+            if result.records.isEmpty {
+                Label("No \(result.recordType.rawValue) records were returned.", systemImage: "info.circle")
+                    .foregroundStyle(.secondary)
+            } else {
+                Text("Records")
+                    .font(.headline)
 
-            ForEach(result.records, id: \.self) { record in
+                ForEach(result.records, id: \.self) { record in
+                    HStack(alignment: .top) {
+                        Image(systemName: "circle.fill")
+                            .font(.system(size: 8))
+                            .foregroundStyle(.blue)
+                            .padding(.top, 5)
 
-                HStack {
-
-                    Image(systemName: "circle.fill")
-                        .font(.system(size: 8))
-                        .foregroundStyle(.blue)
-
-                    Text(record)
-
+                        Text(record)
+                            .textSelection(.enabled)
+                    }
+                    .padding(.vertical, 4)
                 }
-                .padding(.vertical, 4)
-
             }
-
         }
         .padding()
         .background(AppColors.card)

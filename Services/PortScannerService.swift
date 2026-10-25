@@ -12,7 +12,10 @@ struct PortScannerService {
 
     func scan(host: String, port: Int) async -> Bool {
 
-        guard let nwPort = NWEndpoint.Port(rawValue: UInt16(port)) else {
+        guard
+            (1...65_535).contains(port),
+            let nwPort = NWEndpoint.Port(rawValue: UInt16(port))
+        else {
             return false
         }
 
@@ -94,6 +97,7 @@ struct PortScannerService {
         var openPorts: [Int] = []
 
         for chunk in ports.chunked(into: 20) {
+            guard !Task.isCancelled else { break }
 
             await withTaskGroup(of: Int?.self) { group in
 

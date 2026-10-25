@@ -22,9 +22,10 @@ struct ResultCard: View {
             Divider()
 
             Text(text)
-                .font(.body)
+                .font(.system(.body, design: .monospaced))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundStyle(.white)
+                .textSelection(.enabled)
 
         }
         .padding()

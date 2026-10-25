@@ -1,9 +1,10 @@
 import Observation
 import Foundation
 
-@Observable
+@MainActor @Observable
 final class ToolViewModel {
-    
+    static let maximumPortRange = 1_024
+
     var input = ""
     var subnetMask = ""
     var result = "Press the button to start."
@@ -23,15 +24,28 @@ final class ToolViewModel {
     var isPinging = false
     var dnsResult: DNSLookupResult?
     var isLookingUpDNS = false
-    
+
+    var isWorking: Bool {
+        isScanning || isPinging || isLookingUpDNS
+    }
+
     private let ipCalculator = IPCalculatorService()
     private let dnsService = DNSLookupService()
     private let whoisService = WhoisService()
     private let portScanner = PortScannerService()
     private let portService = PortService()
     private let pingService = PingService()
-    
+
     func execute(tool: NetworkTool) async {
+        let target = input.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        guard !target.isEmpty else {
+            result = "Enter a host, domain, or IP address to continue."
+            return
+        }
+
+        input = target
+
         switch tool {
         case .ping:
 
@@ -47,7 +61,7 @@ final class ToolViewModel {
 
             do {
 
-                let stats = try await pingService.ping(host: input)
+                let stats = try await pingService.ping(host: target)
 
                 pingHost = stats.host
                 pingIP = stats.ip
@@ -75,7 +89,7 @@ final class ToolViewModel {
             do {
 
                 let lookup = try await dnsService.lookup(
-                    domain: input,
+                    domain: target,
                     type: selectedRecord
                 )
 
@@ -92,7 +106,7 @@ final class ToolViewModel {
             do {
 
                 result = try await whoisService.lookup(
-                    domain: input
+                    domain: target
                 )
 
             } catch {
@@ -107,23 +121,27 @@ final class ToolViewModel {
             guard
                 let start = Int(startPort),
                 let end = Int(endPort),
-                start <= end
+                (1...65_535).contains(start),
+                (1...65_535).contains(end),
+                start <= end,
+                end - start + 1 <= Self.maximumPortRange
             else {
-
-                result = "Invalid port range."
+                result = "Enter a valid range between 1 and 65535 (up to \(Self.maximumPortRange) ports at a time)."
                 return
             }
 
             let startTime = Date()
 
             isScanning = true
-            
+            scannedPorts = 0
+            totalPorts = end - start + 1
+            progress = 0
             scanResults.removeAll()
             scanDuration = 0
             result = ""
 
             let ports = await portScanner.scan(
-                host: input,
+                host: target,
                 from: start,
                 to: end
             ){ scanned, total in
@@ -153,19 +171,11 @@ final class ToolViewModel {
 
             } else {
 
-                scanResults = ports.compactMap { port in
-
-                    let service = portService.serviceName(for: port)
-
-                    guard service != "Unknown" else {
-                        return nil
-                    }
-
-                    return PortScanResult(
+                scanResults = ports.map { port in
+                    PortScanResult(
                         port: port,
-                        service: service
+                        service: portService.serviceName(for: port)
                     )
-
                 }
 
                 result = ""
@@ -175,11 +185,11 @@ final class ToolViewModel {
             case .ipCalculator:
 
             guard let result = ipCalculator.calculate(
-                ip: input,
+                ip: target,
                 subnetMask: subnetMask
             ) else {
 
-                self.result = "Invalid IP address."
+                self.result = "Enter a valid IPv4 address and a contiguous subnet mask."
 
                 return
             }
@@ -204,6 +214,5 @@ final class ToolViewModel {
             """
         }
     }
-    
-    
+
 }

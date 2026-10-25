@@ -13,20 +13,34 @@ struct ToolCard: View {
 
     var body: some View {
 
-        VStack(spacing: AppSpacing.medium) {
+        VStack(alignment: .leading, spacing: AppSpacing.medium) {
 
             Image(systemName: tool.icon)
-                .font(.system(size: 34))
-                .foregroundStyle(.blue)
+                .font(.system(size: 26, weight: .semibold))
+                .foregroundStyle(AppColors.primary)
+                .frame(width: 48, height: 48)
+                .background(AppColors.primary.opacity(0.13))
+                .clipShape(RoundedRectangle(cornerRadius: 14))
 
             Text(tool.title)
                 .font(.headline)
-                .multilineTextAlignment(.center)
                 .foregroundStyle(.white)
+
+            Text(tool.summary)
+                .font(.caption)
+                .foregroundStyle(AppColors.secondaryText)
+                .lineLimit(2)
+
+            Spacer(minLength: 0)
         }
+        .padding()
         .frame(maxWidth: .infinity)
-        .frame(height: 150)
+        .frame(height: 184, alignment: .leading)
         .background(AppColors.card)
+        .overlay(
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(Color.white.opacity(0.07), lineWidth: 1)
+        )
         .clipShape(RoundedRectangle(cornerRadius: 20))
     }
 }

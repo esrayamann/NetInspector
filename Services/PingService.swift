@@ -7,13 +7,18 @@ struct PingService {
         host: String,
         count: Int = 5
     ) async throws -> PingStatistics {
-        
-        // DNS çözümlemesi
+        let host = host.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        guard !host.isEmpty else {
+            throw URLError(.badURL)
+        }
+
         let ip = try await resolve(host: host)
 
         var values: [Double] = []
 
         for _ in 0..<count {
+            try Task.checkCancellation()
 
             let latency = try await singlePing(
                 host: host,
@@ -49,32 +54,49 @@ struct PingService {
 
         let start = Date()
 
-        return try await withCheckedThrowingContinuation { continuation in
+        return try await withThrowingTaskGroup(of: Double.self) { group in
+            group.addTask {
+                let stream = AsyncThrowingStream<Double, Error> { continuation in
+                    connection.stateUpdateHandler = { state in
+                        switch state {
+                        case .ready:
+                            continuation.yield(Date().timeIntervalSince(start) * 1000)
+                            continuation.finish()
+                        case .failed(let error):
+                            continuation.finish(throwing: error)
+                        case .cancelled:
+                            continuation.finish(throwing: CancellationError())
+                        default:
+                            break
+                        }
+                    }
 
-            connection.stateUpdateHandler = { state in
-
-                switch state {
-
-                case .ready:
-
-                    let latency = Date().timeIntervalSince(start) * 1000
-
-                    connection.cancel()
-
-                    continuation.resume(returning: latency)
-
-                case .failed(let error):
-
-                    connection.cancel()
-
-                    continuation.resume(throwing: error)
-
-                default:
-                    break
+                    connection.start(queue: .global())
                 }
+
+                for try await latency in stream {
+                    return latency
+                }
+
+                throw URLError(.cannotConnectToHost)
             }
 
-            connection.start(queue: .global())
+            group.addTask {
+                try await Task.sleep(for: .seconds(5))
+                connection.cancel()
+                throw URLError(.timedOut)
+            }
+
+            defer {
+                connection.cancel()
+                group.cancelAll()
+            }
+
+            guard let latency = try await group.next() else {
+                throw URLError(.cannotConnectToHost)
+            }
+
+            return latency
         }
     }
 

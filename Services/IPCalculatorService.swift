@@ -13,7 +13,8 @@ struct IPCalculatorService {
 
         guard
             let ipOctets = octets(from: ip),
-            let maskOctets = octets(from: subnetMask)
+            let maskOctets = octets(from: subnetMask),
+            isValidSubnetMask(maskOctets)
         else {
             return nil
         }
@@ -25,13 +26,27 @@ struct IPCalculatorService {
             mask: maskOctets
         )
 
-        let first = firstHost(from: network)
-
-        let last = lastHost(from: broadcast)
-
         let prefix = prefixLength(from: maskOctets)
 
-        let hosts = hostCount(prefix: prefix)
+        let first: [UInt8]
+        let last: [UInt8]
+        let hosts: Int
+
+        switch prefix {
+        case 32:
+            first = network
+            last = network
+            hosts = 1
+        case 31:
+            // RFC 3021 point-to-point subnets use both addresses.
+            first = network
+            last = broadcast
+            hosts = 2
+        default:
+            first = firstHost(from: network)
+            last = lastHost(from: broadcast)
+            hosts = hostCount(prefix: prefix)
+        }
 
         return IPCalculationResult(
 
@@ -69,6 +84,19 @@ struct IPCalculatorService {
     private func string(from octets: [UInt8]) -> String {
 
         octets.map(String.init).joined(separator: ".")
+    }
+
+    private func isValidSubnetMask(_ mask: [UInt8]) -> Bool {
+        let value = mask.reduce(UInt32(0)) { partialResult, octet in
+            (partialResult << 8) | UInt32(octet)
+        }
+
+        return (0...32).contains { prefix in
+            let expected: UInt32 = prefix == 0
+                ? 0
+                : UInt32.max << (32 - prefix)
+            return value == expected
+        }
     }
     
     private func networkAddress(ip: [UInt8], mask: [UInt8]) -> [UInt8] {
@@ -111,13 +139,6 @@ struct IPCalculatorService {
     private func hostCount(prefix: Int) -> Int {
 
         let hostBits = 32 - prefix
-
-        guard hostBits > 1 else {
-            return 0
-        }
-
         return (1 << hostBits) - 2
-
     }
-    
 }

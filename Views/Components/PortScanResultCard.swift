@@ -79,12 +79,9 @@ struct PortScanResultCard: View {
                         .frame(width: 50, alignment: .leading)
 
                     Text(result.service)
+                        .foregroundStyle(.secondary)
 
                     Spacer()
-
-                    Image(systemName: "chevron.right")
-                        .foregroundStyle(.secondary)
-                        .font(.caption)
 
                 }
                 .padding(.vertical, 6)
