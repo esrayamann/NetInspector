@@ -6,6 +6,12 @@ NetInspector gives developers, students, and IT professionals a clean way to che
 
 > Only inspect systems and networks you own or are explicitly authorized to test.
 
+## Screenshots
+
+<p align="center">
+  <img src="docs/images/home-screen.png" alt="NetInspector home screen showing the available network tools" width="320">
+</p>
+
 ## Features
 
 - **TCP latency check** — measures connection latency to a host over TCP/443 and presents individual samples plus minimum, average, and maximum times.
